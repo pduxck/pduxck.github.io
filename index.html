@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pduck Tech Lab – UI Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #0b0b0b;
+      color: #00ff99;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }.screen {
+  width: 320px;
+  height: 240px;
+  border: 3px solid #00ff99;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.screen.active {
+  display: flex;
+}
+
+h1 {
+  font-size: 1.4em;
+  margin: 0;
+  text-align: center;
+}
+
+p {
+  font-size: 0.9em;
+  color: #ccc;
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-button {
+  padding: 10px;
+  border: 2px solid #00ff99;
+  border-radius: 6px;
+  background: transparent;
+  color: #00ff99;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-button:hover {
+  background: #00ff99;
+  color: #000;
+}
+
+.hint {
+  font-size: 0.7em;
+  text-align: center;
+  color: #555;
+}
+
+  </style>
+</head>
+<body>  <!-- Seite 1 -->  <div class="screen active" id="page1">
+    <h1>Pduck UI</h1>
+    <p>Ich code Software<br>
+Ich entwickle eigene PCB-Boards<br>
+Ich schreibe Ducky Scripts<br><br>
+UI / Design / Test</p><div class="menu">
+  <div class="menu-button" onclick="goToPage(2)">▶ Start Test</div>
+</div>
+
+<div class="hint">Umrandung drücken = Weiter</div>
+
+  </div>  <!-- Seite 2 -->  <div class="screen" id="page2">
+    <h1>A.L.O.A</h1>
+    <p>Testmodus aktiv
+    <br>Kein Verkauf
+    <br>Nur UI / Design</p><div class="menu">
+  <div class="menu-button" onclick="goToPage(1)">◀ Zurück</div>
+</div>
+
+<div class="hint">UI ähnlich Geräte‑Menü</div>
+
+  </div>  <script>
+    function goToPage(page) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('page' + page).classList.add('active');
+    }
+  </script></body>
+</html>
