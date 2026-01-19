@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pduck Tech Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- Grundstil --- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      color: #00ff99;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: #00ff99; }
+
+    /* --- Header --- */
+    header {
+      background: #111;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ff99;
+    }
+    header h1 {
+      font-size: 3.5em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2em;
+      color: #66ffbb;
+      margin-top: 10px;
+    }
+
+    /* --- Main Section --- */
+    main {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    main h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    main p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #ccc;
+    }
+    .button {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: bold;
+      background-color: #00ff99;
+      color: #0d0d0d;
+      transition: 0.3s;
+    }
+    .button:hover {
+      background-color: #00cc7a;
+    }
+
+    /* --- Projekte Section --- */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .project-card {
+      background-color: #111;
+      padding: 20px;
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .project-card:hover {
+      transform: scale(1.05);
+      border-color: #66ffbb;
+    }
+    .project-card h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+    .project-card p {
+      color: #ccc;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 2px solid #00ff99;
+      color: #555;
+      font-size: 0.9em;
+    }
+
+    /* --- Animation / Glitch Effekte --- */
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99; }
+      50% { text-shadow: 0 0 15px #66ffbb, 0 0 25px #66ffbb; }
+      100% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99; }
+    }
+    h1 { animation: glow 2s infinite; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pduck Tech Lab</h1>
+    <p>Rubber Ducky, Flipper Zero & DIY Electronics</p>
+  </header>
+
+  <main>
+    <h2>Willkommen im Lab</h2>
+    <p>Hier baue ich meine eigenen Hardware-Spielzeuge: Von Rubber Ducky Payloads über Flipper Zero Add-ons bis hin zu eigenen PCB-Projekten und CNC-Designs. Alles offen, alles kreativ.</p>
+    
+    <a class="button" href="https://github.com/pduxck" target="_blank">Meine GitHub Projekte</a>
+    <a class="button" href="https://discord.com/" target="_blank">Discord Kontakt</a>
+    <a class="button" href="#" target="_blank">Downloads</a>
+
+    <div class="projects">
+      <div class="project-card">
+        <h3>Rubber Ducky</h3>
+        <p>Custom Payloads & PCB Add-ons für automatisierte Aufgaben.</p>
+      </div>
+      <div class="project-card">
+        <h3>Flipper Zero</h3>
+        <p>DIY Modules und Hardware-Erweiterungen für das ultimative Hacker-Tool.</p>
+      </div>
+      <div class="project-card">
+        <h3>PCB Designs</h3>
+        <p>Eigenes Layout, CNC-gefertigte Boards, Silkscreen Branding.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Pduck Tech Lab · Alle Rechte vorbehalten
+  </footer>
+
+</body>
+</html>
