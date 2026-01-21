@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>DUCK IT SYSTEM</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 900px;
+    min-height: 600px;
+    border: 2px solid #00ff00;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+input, button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    background: black;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #00ff00;
+    color: black;
+    cursor: pointer;
+}
+
+hr {
+    border: 1px solid #00ff00;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+}
+
+pre {
+    font-size: 13px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.panel {
+    border: 1px solid #00ff00;
+    padding: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+<div class="container">
+
+<pre>
+      __
+ ___( o)>
+ \ <_. )
+  `---'   DUCK IT SYSTEM
+</pre>
+
+<div id="error" class="error"></div>
+
+<!-- AUTH -->
+<div id="auth" class="grid">
+    <div class="panel">
+        <h3>Registrieren</h3>
+        <input id="regUser" placeholder="Username">
+        <input id="regPass" type="password" placeholder="Passwort">
+        <button onclick="register()">Registrieren</button>
+    </div>
+
+    <div class="panel">
+        <h3>Login</h3>
+        <input id="logUser" placeholder="Username">
+        <input id="logPass" type="password" placeholder="Passwort">
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+    <hr>
+    <h2>Dashboard</h2>
+
+    <div class="grid">
+        <div class="panel">
+            <p>User: <b id="userName"></b></p>
+            <p>Bucks: <b id="bucks"></b> 💰</p>
+            <button onclick="work()">Arbeiten (+20 Bucks)</button>
+            <button onclick="gamble()">Zocken (±50 Bucks)</button>
+        </div>
+
+        <div class="panel">
+            <h3>Bucks übertragen</h3>
+            <input id="toUser" placeholder="Empfänger">
+            <input id="amount" type="number" placeholder="Bucks">
+            <button onclick="transfer()">Senden</button>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="panel hidden">
+        <h3>ADMIN PANEL</h3>
+        <button onclick="giveAll()">Allen +100 Bucks</button>
+        <button onclick="resetEconomy()">Wirtschaft reset</button>
+    </div>
+
+    <br>
+    <button onclick="logout()">Logout</button>
+</div>
+
+</div>
+</div>
+
+<script>
+// INIT USERS
+if (!localStorage.getItem("users")) {
+    const users = {
+        "Admin": { password: "Admin", bucks: 99999 }
+    };
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+// REGISTER
+function register() {
+    const u = regUser.value.trim();
+    const p = regPass.value.trim();
+    if (!u || !p) return error.textContent = "Alle Felder ausfüllen!";
+
+    let users = JSON.parse(localStorage.getItem("users"));
+    if (users[u]) return error.textContent = "User existiert bereits!";
+
+    users[u] = { password: p, bucks: 200 };
+    localStorage.setItem("users", JSON.stringify(users"));
+    error.textContent = "Registrierung erfolgreich!";
+    regUser.value = regPass.value = "";
+}
+
+// LOGIN
+function login() {
+    let users = JSON.parse(localStorage.getItem("users"));
+    const u = logUser.value.trim();
+    const p = logPass.value.trim();
+
+    if (!users[u] || users[u].password !== p)
+        return error.textContent = "Login fehlgeschlagen!";
+
+    localStorage.setItem("currentUser", u);
+    loadDashboard();
+}
+
+// DASHBOARD
+function loadDashboard() {
+    const u = localStorage.getItem("currentUser");
+    if (!u) return;
+
+    let users = JSON.parse(localStorage.getItem("users"));
+    auth.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+
+    userName.textContent = u;
+    bucks.textContent = users[u].bucks;
+
+    if (u === "Admin") adminPanel.classList.remove("hidden");
+}
+
+// ACTIONS
+function work() {
+    updateBucks(20);
+}
+
+function gamble() {
+    const win = Math.random() > 0.5 ? 50 : -50;
+    updateBucks(win);
+}
+
+function updateBucks(amount) {
+    let users = JSON.parse(localStorage.getItem("users"));
+    const u = localStorage.getItem("currentUser");
+    users[u].bucks += amount;
+    localStorage.setItem("users", JSON.stringify(users));
+    bucks.textContent = users[u].bucks;
+}
+
+// TRANSFER
+function transfer() {
+    let users = JSON.parse(localStorage.getItem("users"));
+    const from = localStorage.getItem("currentUser");
+    const to = toUser.value.trim();
+    const amount = parseInt(amount.value);
+
+    if (!users[to] || amount <= 0 || users[from].bucks < amount)
+        return error.textContent = "Transfer fehlgeschlagen!";
+
+    users[from].bucks -= amount;
+    users[to].bucks += amount;
+    localStorage.setItem("users", JSON.stringify(users));
+    loadDashboard();
+}
+
+// ADMIN
+function giveAll() {
+    let users = JSON.parse(localStorage.getItem("users"));
+    for (let u in users) users[u].bucks += 100;
+    localStorage.setItem("users", JSON.stringify(users));
+    loadDashboard();
+}
+
+function resetEconomy() {
+    let users = JSON.parse(localStorage.getItem("users"));
+    for (let u in users) users[u].bucks = u === "Admin" ? 99999 : 100;
+    localStorage.setItem("users", JSON.stringify(users));
+    loadDashboard();
+}
+
+// LOGOUT
+function logout() {
+    localStorage.removeItem("currentUser");
+    location.reload();
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>
