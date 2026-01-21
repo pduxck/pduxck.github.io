@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Login & Registrierung</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+  .container { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); width: 300px; }
+  input { width: 100%; padding: 8px; margin: 8px 0; }
+  button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { background: #0056b3; }
+  .error { color: red; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Registrieren</h2>
+  <div class="error" id="error"></div>
+  <input type="text" id="username" placeholder="Benutzername">
+  <input type="password" id="password" placeholder="Passwort">
+  <button onclick="register()">Registrieren</button>
+
+  <hr>
+  <h2>Login</h2>
+  <input type="text" id="loginUsername" placeholder="Benutzername">
+  <input type="password" id="loginPassword" placeholder="Passwort">
+  <button onclick="login()">Login</button>
+
+  <div id="welcome"></div>
+</div>
+
+<script>
+  function register() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    const error = document.getElementById('error');
+    if (!username || !password) {
+      error.textContent = "Bitte alle Felder ausfüllen!";
+      return;
+    }
+
+    // Daten im localStorage speichern
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
+    error.textContent = "Registrierung erfolgreich! Jetzt kannst du dich einloggen.";
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+  }
+
+  function login() {
+    const loginUsername = document.getElementById('loginUsername').value;
+    const loginPassword = document.getElementById('loginPassword').value;
+
+    const storedUsername = localStorage.getItem('username');
+    const storedPassword = localStorage.getItem('password');
+
+    if (loginUsername === storedUsername && loginPassword === storedPassword) {
+      document.getElementById('welcome').textContent = `Willkommen, ${storedUsername}!`;
+    } else {
+      document.getElementById('welcome').textContent = "Benutzername oder Passwort falsch!";
+    }
+  }
+</script>
+
+</body>
+</html>
