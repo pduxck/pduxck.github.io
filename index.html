@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pduxck Zero | Ducky Payloads</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #121821;
+            --neon: #00ffcc;
+            --text: #d0d6e0;
+            --muted: #8a93a3;
+            --danger: #ff4d4d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Consolas", "Courier New", monospace;
+            background: radial-gradient(circle at top, #0f1623, var(--bg));
+            color: var(--text);
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #0f172a, #090d13);
+            border-bottom: 1px solid #1f2937;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.6rem;
+            letter-spacing: 2px;
+            color: var(--neon);
+        }
+
+        header p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--panel);
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.03);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--neon);
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 8px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .downloads a {
+            display: block;
+            margin: 15px 0;
+            padding: 16px;
+            background: #0c121b;
+            border: 1px solid #1f2937;
+            border-left: 4px solid var(--neon);
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .downloads a:hover {
+            background: #111827;
+            transform: translateX(4px);
+        }
+
+        .warning {
+            border: 1px solid var(--danger);
+            background: rgba(255, 77, 77, 0.08);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .warning h3 {
+            margin-top: 0;
+            color: var(--danger);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid #1f2937;
+            background: #090d13;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PDUXCK ZERO</h1>
+    <p>HID Research • Ducky Scripts • Hardware • Custom PCB</p>
+</header>
+
+<section>
+    <h2>About Me</h2>
+    <p>
+        I focus on low-level programming, hardware development, and offensive security research.
+        My work includes writing custom <strong>Ducky Scripts</strong>, developing HID payloads,
+        and designing <strong>custom PCB boards</strong> for microcontroller and USB-based projects.
+    </p>
+    <p>
+        This platform is used to publish research tools, proof-of-concept payloads,
+        and experimental software related to HID devices and automation.
+    </p>
+</section>
+
+<section>
+    <h2>Downloads</h2>
+    <div class="downloads">
+        <a href="payload1.txt" download>
+            ▶ Ducky Script – Payload 1
+        </a>
+
+        <a href="payload2.txt" download>
+            ▶ Ducky Script – Payload 2
+        </a>
+
+        <a href="tool.zip" download>
+            ▶ Research Tool / Software Package
+        </a>
+    </div>
+</section>
+
+<section>
+    <h2>Legal & Ethical Disclaimer</h2>
+    <div class="warning">
+        <h3>⚠ WARNING</h3>
+        <p>
+            All payloads, scripts, tools, and software provided on this website are published
+            strictly for <strong>educational, research, and authorized testing purposes only</strong>.
+        </p>
+        <p>
+            Unauthorized use of HID attacks, BadUSB payloads, or automation scripts against
+            systems, networks, or devices without explicit permission is illegal and unethical.
+        </p>
+        <p>
+            <strong>You are solely responsible</strong> for how you use the information and files
+            provided here. The author assumes no liability for misuse, damage, data loss,
+            or legal consequences resulting from improper use.
+        </p>
+    </div>
+</section>
+
+<footer>
+    © 2026 – Made By Pduxck 
+</footer>
+
+</body>
+</html>
